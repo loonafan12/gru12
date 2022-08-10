@@ -39,7 +39,7 @@ def tweet_image(url, message):
         with open(filename, 'wb') as image:
             for chunk in request.iter_content(chunk_size=1024**2):
                 image.write(chunk)
-        api.update_status_with_media(filename, status=message)
+        api.update_with_media(filename, status=message)
         os.remove(filename)
     else:
         filename.append(str(url))
