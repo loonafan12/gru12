@@ -58,5 +58,5 @@ while True:
         message = "[" + emoji + "📸" + "]" + "" + format
         tweet_image(url, message)
     else:
-        print("error")
-    time.sleep(60)
+        pass
+    time.sleep(1800)
