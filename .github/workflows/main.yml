@@ -3,8 +3,6 @@
 name: Runner
 
 on:
-  schedule:
-   - cron: "*/5 * * * *" # Runs every 10 minutes, everyday (actual timing may vary, depending on GitHub)
   workflow_dispatch:
 
 jobs:
