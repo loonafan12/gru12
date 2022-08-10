@@ -50,4 +50,4 @@ url = "https://dnkvjm1f8biz3.cloudfront.net/images/letter/1600/1656690123_202207
 message = "[🦢📸] 220702 00:42"
 while True:
     tweet_image(url, message)
-    time.sleep(60)
+    time.sleep(21600)
