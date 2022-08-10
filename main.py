@@ -50,7 +50,6 @@ def tweet_image(url, message):
         filename.append(str(url))
         print("Unable to download image")
 
-message = "[🦢📸] 220702 00:42"
 while True:
     if str(update['userId']) in Animal:
         emoji = Animal.get(str(update['userId']))
