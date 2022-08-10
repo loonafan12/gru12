@@ -52,7 +52,7 @@ url = "https://dnkvjm1f8biz3.cloudfront.net/images/letter/1600/1656690123_202207
 message = "[🦢📸] 220702 00:42"
 while True:
     tweet_image(url, message)
-    time.sleep(21600)
+    time.sleep(3600)
     
 # fab = requests.get(url, headers=headers)
 # update = fab.json()['messages'][3]
