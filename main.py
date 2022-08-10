@@ -18,7 +18,8 @@ Media = {
 headers = {
    "user-agent": "fab|ios|appstore|1.2.1|15.3.1|iPhone14,3|apple|ko|KR"
 }
-update = requests.get("https://vip-fab-api.myfab.tv/fapi/2/messages/", headers=headers)['messages'][0]
+fab = requests.get("https://vip-fab-api.myfab.tv/fapi/2/messages/", headers=headers)
+update = fab.json()['messages'][0]
 
 def thumbnail():
     requests.get(fab, headers=headers)
