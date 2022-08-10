@@ -36,7 +36,7 @@ def tweet_image(url, message):
     filename = 'temp.jpg'
     request = requests.get(url, stream=True)
     while True:
-        time sleep(60)
+        time.sleep(60)
         if request.status_code == 200:
             with open(filename, 'wb') as image:
                 for chunk in request.iter_content(chunk_size=1024**2):
