@@ -35,15 +35,17 @@ def tweet_image(url, message):
     api = twitter_api()
     filename = 'temp.jpg'
     request = requests.get(url, stream=True)
-    if request.status_code == 200:
-        with open(filename, 'wb') as image:
-            for chunk in request.iter_content(chunk_size=1024**2):
-                image.write(chunk)
-        api.update_with_media(filename, status=message)
-        os.remove(filename)
-    else:
-        filename.append(str(url))
-        print("Unable to download image")
+    while True:
+        time sleep(60)
+        if request.status_code == 200:
+            with open(filename, 'wb') as image:
+                for chunk in request.iter_content(chunk_size=1024**2):
+                    image.write(chunk)
+            api.update_with_media(filename, status=message)
+            os.remove(filename)
+        else:
+            filename.append(str(url))
+            print("Unable to download image")
 
 
 url = "https://dnkvjm1f8biz3.cloudfront.net/images/letter/1600/1656690123_20220702004202_1_f.jpg"
