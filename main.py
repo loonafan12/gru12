@@ -5,6 +5,8 @@ import time
 from datetime import date, datetime,timezone,timedelta
 import json
 
+MEDIA_ENDPOINT_URL = 'https://upload.twitter.com/1.1/media/upload.json'
+POST_TWEET_URL = 'https://api.twitter.com/1.1/statuses/update.json'
 
 Animal = {
     "2": "🐰", "3": "🐱", "4": "🕊", "5": "🐻", "6": "🦌", "7": "🦉",
@@ -51,3 +53,11 @@ message = "[🦢📸] 220702 00:42"
 while True:
     tweet_image(url, message)
     time.sleep(21600)
+    
+# fab = requests.get(url, headers=headers)
+# update = fab.json()['messages'][3]
+# ## for emoji
+# if str(update['userId']) in Animal:
+#    emoji = Animal.get(str(update['userId']))
+#    format = datetime.fromtimestamp(update['publishedAt']/1000,timezone.utc).astimezone(timezone(timedelta(hours=9),name="KST")).strftime("%y%m%d %H:%M")
+#    thumbnail = update['letter']['thumbnail']
