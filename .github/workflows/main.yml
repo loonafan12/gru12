@@ -20,6 +20,9 @@ jobs:
     - name: install pip # Install pip
       run: |
         python -m pip install --upgrade pip
+    - name: tweepy
+      run: |
+        python -m pip install tweepy==2.8.0
     - name: install requirements # Install external modules
       run: |
         pip3 install -r requirements.txt
