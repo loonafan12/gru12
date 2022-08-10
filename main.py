@@ -19,6 +19,8 @@ fab = "https://vip-fab-api.myfab.tv/fapi/2/messages/"
 headers = {
    "user-agent": "fab|ios|appstore|1.2.1|15.3.1|iPhone14,3|apple|ko|KR"
 }
+update = fab.json()['messages'][0]
+
 def thumbnail():
     requests.get(fab, headers=headers)
 
@@ -48,16 +50,14 @@ def tweet_image(url, message):
         filename.append(str(url))
         print("Unable to download image")
 
-url = "https://dnkvjm1f8biz3.cloudfront.net/images/letter/1600/1656690123_20220702004202_1_f.jpg"
 message = "[🦢📸] 220702 00:42"
 while True:
-    tweet_image(url, message)
-    time.sleep(3600)
-    
-# fab = requests.get(url, headers=headers)
-# update = fab.json()['messages'][3]
-# ## for emoji
-# if str(update['userId']) in Animal:
-#    emoji = Animal.get(str(update['userId']))
-#    format = datetime.fromtimestamp(update['publishedAt']/1000,timezone.utc).astimezone(timezone(timedelta(hours=9),name="KST")).strftime("%y%m%d %H:%M")
-#    thumbnail = update['letter']['thumbnail']
+    if str(update['userId']) in Animal:
+        emoji = Animal.get(str(update['userId']))
+        format = datetime.fromtimestamp(update['publishedAt']/1000,timezone.utc).astimezone(timezone(timedelta(hours=9),name="KST")).strftime("%y%m%d %H:%M")
+        url = update['letter']['thumbnail']
+        message = "[" + emoji + "📸" + "]" + "" + format
+        tweet_image(url, message)
+        time.sleep(60)
+   else:
+        pass
