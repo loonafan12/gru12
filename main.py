@@ -58,6 +58,6 @@ while True:
         url = update['letter']['thumbnail']
         message = "[" + emoji + "📸" + "]" + "" + format
         tweet_image(url, message)
-        time.sleep(60)
-   else:
+    else:
         pass
+    time.sleep(60)
