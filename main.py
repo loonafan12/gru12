@@ -53,9 +53,10 @@ def tweet_image(url, message):
 while True:
     if str(update['userId']) in Animal:
         emoji = Animal.get(str(update['userId']))
-        format = datetime.fromtimestamp(update['publishedAt']/1000,timezone.utc).astimezone(timezone(timedelta(hours=9),name="KST")).strftime("%y%m%d %H:%M")
+        time_1 = datetime.fromtimestamp(update['publishedAt']/1000,timezone.utc).astimezone(timezone(timedelta(hours=9),name="KST")).strftime("%y%m%d %H:%M")
+        time_2 = datetime.fromtimestamp(update['publishedAt']/1000,timezone.utc).astimezone(timezone(timedelta(hours=-4),name="EDT")).strftime("%y%m%d %H:%M")
         url = update['letter']['thumbnail']
-        message = "[" + emoji + "📸" + "]" + "" + format
+        message = "[" + emoji + "📸" + "]" + " " + time_1 + " KST" + " (" + time_2 + " EDT)"
         tweet_image(url, message)
     else:
         pass
