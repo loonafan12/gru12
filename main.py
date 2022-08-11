@@ -18,11 +18,6 @@ Media = {
 headers = {
    "user-agent": "fab|ios|appstore|1.2.1|15.3.1|iPhone14,3|apple|ko|KR"
 }
-fab = requests.get("https://vip-fab-api.myfab.tv/fapi/2/messages/", headers=headers)
-update = fab.json()['messages'][0]
-
-def thumbnail():
-    requests.get(fab, headers=headers)
 
 def twitter_api():
     access_token = '1540884453777866752-tN94jZPOwAAy4ZuJ0DuJcFg3ZLRov4'
@@ -34,7 +29,6 @@ def twitter_api():
     auth.set_access_token(access_token, access_token_secret)
     api = tweepy.API(auth)
     return api
-
 
 def tweet_image(url, message):
     api = twitter_api()
@@ -48,9 +42,15 @@ def tweet_image(url, message):
         os.remove(filename)
     else:
         filename.append(str(url))
-        print("Unable to download image")
+
+def dupes():
+    api = twitter_api()
+    api.search
+    
 
 while True:
+    fab = requests.get("https://vip-fab-api.myfab.tv/fapi/2/messages/", headers=headers)
+    update = fab.json()['messages'][0]
     if str(update['userId']) in Animal:
         emoji = Animal.get(str(update['userId']))
         time_1 = datetime.fromtimestamp(update['publishedAt']/1000,timezone.utc).astimezone(timezone(timedelta(hours=9),name="KST")).strftime("%y%m%d %H:%M")
