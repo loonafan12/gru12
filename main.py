@@ -53,7 +53,7 @@ while True:
     if str(update['userId']) in Animal:
         emoji = Animal.get(str(update['userId']))
         time_1 = datetime.fromtimestamp(update['publishedAt']/1000,timezone.utc).astimezone(timezone(timedelta(hours=9),name="KST")).strftime("%y%m%d %H:%M")
-        time_2 = datetime.fromtimestamp(time_1).astimezone(timezone(timedelta(hours=-13),name="EDT")).strftime("%y%m%d %H:%M")
+        time_2 = datetime.fromtimestamp(update['publishedAt']/1000,timezone.utc).astimezone(timezone(timedelta(hours=-4),name="EDT")).strftime("%y%m%d %H:%M")
         if "letter" in update:
             url = update['letter']['thumbnail']
             message = "[" + emoji + "📸" + "]" + " " + time_1 + " KST" + " (" + time_2 + " EDT)"
