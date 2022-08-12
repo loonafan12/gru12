@@ -32,7 +32,7 @@ def twitter_api():
 
 def tweet_image(url, message):
     api = twitter_api()
-    filename = 'temp.jpg'
+    filename = "temp.jpg"
     request = requests.get(url, stream=True)
     if request.status_code == 200:
         with open(filename, 'wb') as image:
@@ -43,29 +43,27 @@ def tweet_image(url, message):
     else:
         filename.append(str(url))
 
-def dupes():
-    api = twitter_api()
-    api.search
+# def dupes():
+#     api = twitter_api()
+#     api.search
     
-
 while True:
     fab = requests.get("https://vip-fab-api.myfab.tv/fapi/2/messages/", headers=headers)
     update = fab.json()['messages'][0]
     if str(update['userId']) in Animal:
+        emoji = Animal.get(str(update['userId']))
+        time_1 = datetime.fromtimestamp(update['publishedAt']/1000,timezone.utc).astimezone(timezone(timedelta(hours=9),name="KST")).strftime("%y%m%d %H:%M")
+        time_2 = datetime.fromtimestamp(time_1).astimezone(timezone(timedelta(hours=-13),name="EDT")).strftime("%y%m%d %H:%M")
         if "letter" in update:
-            emoji = Animal.get(str(update['userId']))
-            time_1 = datetime.fromtimestamp(update['publishedAt']/1000,timezone.utc).astimezone(timezone(timedelta(hours=9),name="KST")).strftime("%y%m%d %H:%M")
-            time_2 = datetime.fromtimestamp(update['publishedAt']/1000,timezone.utc).astimezone(timezone(timedelta(hours=-4),name="EDT")).strftime("%y%m%d %H:%M")
             url = update['letter']['thumbnail']
             message = "[" + emoji + "📸" + "]" + " " + time_1 + " KST" + " (" + time_2 + " EDT)"
             tweet_image(url, message)
         elif "postcard" in update:
-            emoji = Animal.get(str(update['userId']))
-            time_1 = datetime.fromtimestamp(update['publishedAt']/1000,timezone.utc).astimezone(timezone(timedelta(hours=9),name="KST")).strftime("%y%m%d %H:%M")
-            time_2 = datetime.fromtimestamp(update['publishedAt']/1000,timezone.utc).astimezone(timezone(timedelta(hours=-4),name="EDT")).strftime("%y%m%d %H:%M")
-            url = update['letter']['thumbnail']
+            url = update['postcard']['thumbnail']
             message = "[" + emoji + "🎥" + "]" + " " + time_1 + " KST" + " (" + time_2 + " EDT)"
             tweet_image(url, message)
+        else:
+            pass
     else:
         pass
     time.sleep(1800)
