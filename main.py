@@ -13,7 +13,7 @@ Animal = {
     "8": "🐯", "9": "🐿", "10":"🦢", "11": "🐧", "12": "🦋", "13": "🐺"
 }
 Media = {
-    "letter": "📸", "postcard": "📸"
+    "letter": "📸", "postcard": "🎥"
 }
 headers = {
    "user-agent": "fab|ios|appstore|1.2.1|15.3.1|iPhone14,3|apple|ko|KR"
@@ -52,12 +52,20 @@ while True:
     fab = requests.get("https://vip-fab-api.myfab.tv/fapi/2/messages/", headers=headers)
     update = fab.json()['messages'][0]
     if str(update['userId']) in Animal:
-        emoji = Animal.get(str(update['userId']))
-        time_1 = datetime.fromtimestamp(update['publishedAt']/1000,timezone.utc).astimezone(timezone(timedelta(hours=9),name="KST")).strftime("%y%m%d %H:%M")
-        time_2 = datetime.fromtimestamp(update['publishedAt']/1000,timezone.utc).astimezone(timezone(timedelta(hours=-4),name="EDT")).strftime("%y%m%d %H:%M")
-        url = update['letter']['thumbnail']
-        message = "[" + emoji + "📸" + "]" + " " + time_1 + " KST" + " (" + time_2 + " EDT)"
-        tweet_image(url, message)
+        if "letter" in update:
+            emoji = Animal.get(str(update['userId']))
+            time_1 = datetime.fromtimestamp(update['publishedAt']/1000,timezone.utc).astimezone(timezone(timedelta(hours=9),name="KST")).strftime("%y%m%d %H:%M")
+            time_2 = datetime.fromtimestamp(update['publishedAt']/1000,timezone.utc).astimezone(timezone(timedelta(hours=-4),name="EDT")).strftime("%y%m%d %H:%M")
+            url = update['letter']['thumbnail']
+            message = "[" + emoji + "📸" + "]" + " " + time_1 + " KST" + " (" + time_2 + " EDT)"
+            tweet_image(url, message)
+        elif "postcard" in update:
+            emoji = Animal.get(str(update['userId']))
+            time_1 = datetime.fromtimestamp(update['publishedAt']/1000,timezone.utc).astimezone(timezone(timedelta(hours=9),name="KST")).strftime("%y%m%d %H:%M")
+            time_2 = datetime.fromtimestamp(update['publishedAt']/1000,timezone.utc).astimezone(timezone(timedelta(hours=-4),name="EDT")).strftime("%y%m%d %H:%M")
+            url = update['letter']['thumbnail']
+            message = "[" + emoji + "🎥" + "]" + " " + time_1 + " KST" + " (" + time_2 + " EDT)"
+            tweet_image(url, message)
     else:
         pass
     time.sleep(1800)
